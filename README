@@ -1,0 +1,94 @@
+ ********************************************************************************
+                         EE450 Socket Project README
+
+
+                            Name:    Jin Qi
+                            Session: 1
+                            USC ID:  3991265704
+********************************************************************************
+
+What I Have Done:
+
+    In this socket project, I have successfully implemented all the requirements
+    with one client file, one AWS server file, and three individual server files.
+   
+    I used Unix Socket programming to code and test my programs.It worked as expected.
+	
+********************************************************************************
+
+What Are My Codes:
+	
+	client.c:	Get function type and read original data, sending them to the AWS 
+			via TCP connection. And receive the final result from AWS by TCP.
+				
+	aws.c :		Receive the function type and original data via TCP, and send them  
+                        to server A, server B, server C separately by UDP connection. Also 
+                        the function type. After Receiving each result from corresponding server 
+                        via UDP and then calculate the final result and send the result to client 
+                        using TCP.
+				
+	serverA.c	Get the original data and function type from aws by UDP. Then it do some 
+                        calculation and send the result back to aws using UDP.
+				
+	serverB.c	Get the original data and function type from aws by UDP. Then it do some 
+                        calculation and send the result back to aws using UDP.
+
+	serverC.c	Get the original data and function type from aws by UDP. Then it do some 
+                        calculation and send the result back to aws using UDP.
+				
+********************************************************************************
+
+How TA Runs:
+
+		Open 5 command window, and make all firstly. Then for the 2nd 3rd 4th and 5th
+		window, input command "make serverA" "make serverB" "make serverC" "make AWS"
+		separately. And finally input "./client <functions> <input>" in the 1st window.
+		make clean to end the program.
+		command					 actions
+			
+                make all			Compiles client.c aws.c serverA.c serverB.c serverC.c
+					        and creates corresponding executable
+		make serverA    	        Runs server A
+		make serverB    	        Runs server B
+		make serverC    	        Runs server C
+		make aws    		        Runs aws
+		./client <function><input>	Starts client
+		
+********************************************************************************
+
+Message Format:
+
+		1. The message get from client:
+		
+		function type:  String (char[]) format.
+                Data:Float format,send to AWS.
+		Result: Interger format, from AWS.
+		
+		2. The message get from AWS:
+		
+		function type:  String (char[]) format 
+		Data:Float format,send from client.
+		Results: Float format, from Server A B and C.
+		
+	        3. The message get from server A, server B and server C:
+		
+		Results: Float format, send to aws.
+		
+********************************************************************************
+
+Idiosyncrasy:
+
+       No idiosyncrasies detected for the program itself, which is that it may
+       be affected by the UNIX OS conditions but the problem is not at the
+       program. All possible error may occurred due to the OS's conditions are
+       caught and are properly handled.
+		
+********************************************************************************
+
+Code Reusing:
+        a. Socket Programming via TCP and UDP is reused(modified) from:
+           http://www.linuxhowtos.org/C_C++/socket.htm
+
+********************************************************************************
+
+
